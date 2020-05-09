@@ -4,12 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "check-format": "prettier --check \"**/*.js\"",
+    "format-code": "prettier --write \"**/*.js\""
   },
   "keywords": [],
   "author": "Ariya Hidayat",
   "license": "MIT",
   "devDependencies": {
     "prettier": "~2.0.5"
+  },
+  "prettier": {
+    "tabWidth": 4,
+    "printWidth": 120,
+    "quoteProps": "consistent",
+    "singleQuote": true,
+    "trailingComma": "none"
   }
 }
