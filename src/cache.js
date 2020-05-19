@@ -29,6 +29,18 @@ function createArcGISURL(serviceName, sortOrder, condition) {
     return targetURL.toString();
 }
 
+function isBlocked(content) {
+    let blocked = false;
+    try {
+        const parsed = JSON.parse(content);
+        if (parsed && parsed.error) blocked = true;
+    } catch (e) {
+        // can't infer anything, assuming the best
+        blocked = false;
+    }
+    return blocked;
+}
+
 function cacheArcGIS() {
     console.log('Caching important ArcGIS data...');
 
@@ -43,7 +55,13 @@ function cacheArcGIS() {
     services.forEach((serviceName) => {
         const fileName = 'public/api/cache/' + serviceName;
         const content = curl(createArcGISURL(serviceName), fileName);
-        console.log(`  ${serviceName} -> ${content.length} bytes`);
+        if (isBlocked(content)) {
+            console.log(`  ERROR: Unable to retrieve ${serviceName} properly`);
+            const previousData = `https://dekontaminasi.com/api/cache/${serviceName}`;
+            curl(previousData, fileName);
+        } else {
+            console.log(`  ${serviceName} -> ${content.length} bytes`);
+        }
     });
 
     console.log('COMPLETED.');
