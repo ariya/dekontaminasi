@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npm run ping && npm run cache",
+    "build": "npm run ping && npm run cache && npm run hospitals",
     "ping": "node src/ping.js",
     "cache": "node src/cache.js",
+    "hospitals": "node src/hospitals.js",
     "test": "npm run check-format",
     "check-format": "prettier --check \"**/*.js\"",
     "format-code": "prettier --write \"**/*.js\""
