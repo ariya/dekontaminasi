@@ -3,7 +3,7 @@ const fs = require('fs');
 
 const mkdirp = require('./mkdirp');
 
-function updateCovid19Hospitals() {
+function updateCovid19Hospitals(metadata) {
     console.log('Updating Indonesia COVID-19 Hospitals...');
 
     mkdirp('public/api');
@@ -20,6 +20,9 @@ function updateCovid19Hospitals() {
     const hospitals = rawHospitalList.map((h) => {
         let hh = {};
         Object.keys(h).forEach((k) => (hh[k] = typeof h[k] === 'string' ? h[k].trim() : h[k]));
+        if (!metadata[hh.province]) {
+            console.log(`  Missing ${hh.province}`);
+        }
         return hh;
     });
 
@@ -28,4 +31,5 @@ function updateCovid19Hospitals() {
     console.log('COMPLETED.');
 }
 
-updateCovid19Hospitals();
+const metadata = JSON.parse(fs.readFileSync('metadata.json', 'utf-8').toString());
+updateCovid19Hospitals(metadata);
