@@ -26,7 +26,28 @@ function updateCovid19Hospitals(metadata) {
         return hh;
     });
 
-    fs.writeFileSync('public/api/id/covid19/hospitals', JSON.stringify(hospitals, null, 2));
+    console.log('Rearranging hospitals...');
+    let sortedHospitals = [];
+    Object.keys(metadata).forEach((key) => {
+        const meta = metadata[key];
+
+        function score(h) {
+            let points = 0;
+            const metaname = h.name + ' ' + (h.address ? h.address : '');
+            if (metaname.toLowerCase().indexOf(meta.capital.toLowerCase()) > 0) points += 100;
+            if (h.description.indexOf('Kemenkes') > 0) points += 50;
+            if (h.description.indexOf('Laboratorium') > 0) points += 30;
+            return points;
+        }
+
+        if (meta.type === 'province') {
+            const filteredHospitals = hospitals.filter((h) => h.province === meta.name);
+            console.log(' ', meta.name, filteredHospitals.length);
+            const orderedHospitals = filteredHospitals.sort((h1, h2) => score(h2) - score(h1));
+            sortedHospitals = sortedHospitals.concat(orderedHospitals);
+        }
+    });
+    fs.writeFileSync('public/api/id/covid19/hospitals', JSON.stringify(sortedHospitals, null, 2));
 
     console.log('COMPLETED.');
 }
