@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "npm run ping",
     "ping": "node src/ping.js",
     "test": "npm run check-format",
     "check-format": "prettier --check \"**/*.js\"",
