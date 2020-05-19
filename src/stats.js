@@ -33,7 +33,7 @@ function updateCovid19Stats(metadata) {
         (p) => p.name !== 'Indonesia'
     );
 
-    const stats = { ...nationalStats, regions: provincesStats };
+    const stats = { ...nationalStats, regions: provincesStats.sort((p, q) => q.numbers.infected - p.numbers.infected) };
     fs.writeFileSync(prefix + 'stats', JSON.stringify(stats, null, 2));
 
     console.log('COMPLETED.');
