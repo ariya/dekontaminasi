@@ -1,6 +1,7 @@
 const child_process = require('child_process');
 const fs = require('fs');
 
+const fuzzyMatch = require('./fuzzy-match');
 const mkdirp = require('./mkdirp');
 
 function updateCovid19Hospitals(metadata) {
@@ -21,7 +22,9 @@ function updateCovid19Hospitals(metadata) {
         let hh = {};
         Object.keys(h).forEach((k) => (hh[k] = typeof h[k] === 'string' ? h[k].trim() : h[k]));
         if (!metadata[hh.province]) {
-            console.log(`  Missing ${hh.province}`);
+            const match = fuzzyMatch(Object.keys(metadata), hh.province);
+            console.log(`  Missing ${hh.province}: closest match is ${match.name}`);
+            hh.province = match.name;
         }
         return hh;
     });
