@@ -1,6 +1,7 @@
 const child_process = require('child_process');
 const fs = require('fs');
 
+const fuzzyMatch = require('./fuzzy-match');
 const mkdirp = require('./mkdirp');
 
 function updateCovid19Stats(metadata) {
@@ -29,9 +30,20 @@ function updateCovid19Stats(metadata) {
     updateProvinces();
 
     const nationalStats = JSON.parse(fs.readFileSync(prefix + 'national.json', 'utf-8').toString());
-    const provincesStats = JSON.parse(fs.readFileSync(prefix + 'provinces.json', 'utf-8').toString()).filter(
-        (p) => p.name !== 'Indonesia'
-    );
+
+    const provincesStats = JSON.parse(fs.readFileSync(prefix + 'provinces.json', 'utf-8').toString())
+        .filter((p) => p.name !== 'Indonesia')
+        .map((prov) => {
+            let pp = prov;
+            if (!metadata[prov.name]) {
+                const match = fuzzyMatch(Object.keys(metadata), prov.name);
+                console.log(`  Missing ${prov.name}: closest match is ${match.name}`);
+                pp.name = match.name;
+            }
+            return pp;
+        })
+        .sort((p, q) => p.name.localeCompare(q.name));
+    fs.writeFileSync(prefix + 'provinces.json', JSON.stringify(provincesStats, null, 2));
 
     const stats = { ...nationalStats, regions: provincesStats.sort((p, q) => q.numbers.infected - p.numbers.infected) };
     fs.writeFileSync(prefix + 'stats', JSON.stringify(stats, null, 2));
