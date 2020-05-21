@@ -48,7 +48,7 @@ function fuzzyMatch(list, name) {
     const distances = list.map((p) => {
         return {
             name: p,
-            score: damlevDistance(p, name)
+            score: damlevDistance(p.toLowerCase(), name.toLowerCase())
         };
     });
     return distances.sort((x, y) => x.score - y.score).shift();
