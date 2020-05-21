@@ -48,6 +48,11 @@ function updateCovid19Stats(metadata) {
     const stats = { ...nationalStats, regions: provincesStats.sort((p, q) => q.numbers.infected - p.numbers.infected) };
     fs.writeFileSync(prefix + 'stats', JSON.stringify(stats, null, 2));
 
+    const timestampName = prefix + 'stats.timestamp';
+    const now = Date.now();
+    console.log(`Fresh stats: updating timestamp to ${now}`);
+    fs.writeFileSync(timestampName, now.toString());
+
     console.log('COMPLETED.');
 }
 
