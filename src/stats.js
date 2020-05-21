@@ -1,6 +1,7 @@
 const child_process = require('child_process');
 const fs = require('fs');
 
+const curl = require('./curl');
 const fuzzyMatch = require('./fuzzy-match');
 const mkdirp = require('./mkdirp');
 
@@ -49,10 +50,24 @@ function updateCovid19Stats(metadata) {
     fs.writeFileSync(prefix + 'stats', JSON.stringify(stats, null, 2));
 
     const timestampName = prefix + 'stats.timestamp';
-    const now = Date.now();
-    console.log(`Fresh stats: updating timestamp to ${now}`);
-    fs.writeFileSync(timestampName, now.toString());
+    const timestampUrl = 'https://dekontaminasi.com/api/id/covid19/stats.timestamp';
+    const timestamp = parseInt(curl(timestampUrl, timestampName).trim(), 10);
 
+    const previousStatsUrl = 'https://dekontaminasi.com/api/id/covid19/stats';
+    const previousStatsContent = curl(previousStatsUrl, 'previous.log');
+    if (!previousStatsContent) {
+        console.error('Unable to grab previous stats. Can not compare for now');
+    } else {
+        const previousStats = JSON.parse(previousStatsContent);
+        if (JSON.stringify(stats) === JSON.stringify(previousStats)) {
+            console.log(`Previous timestamp is ${timestamp} -> ${new Date(timestamp).toGMTString()}`);
+            console.log('Previous stats are already up-to-date! Skipping update...');
+        } else {
+            const now = Date.now();
+            console.log(`Fresh stats: updating timestamp to ${now}`);
+            fs.writeFileSync(timestampName, now.toString());
+        }
+    }
     console.log('COMPLETED.');
 }
 
