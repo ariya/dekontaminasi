@@ -12,7 +12,7 @@ function updateCovid19Hospitals(metadata) {
     mkdirp('public/api/id/covid19');
 
     const fileName = 'public/api/id/covid19/hospitals.json';
-    const rawName = 'public/api/cache/RS_Rujukan_COVID19_Indonesia';
+    const rawName = 'public/api/cache/RS_Rujukan_Update_May_2020';
     const jqScript = 'src/hospitals.jq';
 
     child_process.execSync(`cat ${rawName} | jq -f ${jqScript} > ${fileName}`);
@@ -21,9 +21,11 @@ function updateCovid19Hospitals(metadata) {
     const hospitals = rawHospitalList.map((h) => {
         let hh = {};
         Object.keys(h).forEach((k) => (hh[k] = typeof h[k] === 'string' ? h[k].trim() : h[k]));
+        const province = hh.region.split(',').reverse().shift().trim();
+        hh.province = province;
         if (!metadata[hh.province]) {
             const match = fuzzyMatch(Object.keys(metadata), hh.province);
-            console.log(`  Missing ${hh.province}: closest match is ${match.name}`);
+            console.log(`  ${hh.province} => ${match.name}`);
             hh.province = match.name;
         }
         return hh;
@@ -36,10 +38,8 @@ function updateCovid19Hospitals(metadata) {
 
         function score(h) {
             let points = 0;
-            const metaname = h.name + ' ' + (h.address ? h.address : '');
+            const metaname = h.name + ' ' + h.region;
             if (metaname.toLowerCase().indexOf(meta.capital.toLowerCase()) > 0) points += 100;
-            if (h.description.indexOf('Kemenkes') > 0) points += 50;
-            if (h.description.indexOf('Laboratorium') > 0) points += 30;
             return points;
         }
 
