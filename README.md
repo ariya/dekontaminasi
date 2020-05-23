@@ -21,6 +21,8 @@ Beberapa ragam data yang tersedia (dalam format JSON):
 * [Berita-berita termutakhir](https://dekontaminasi.com/api/id/covid19/news) seputar COVID-19
 * [Kabar hoaks](https://dekontaminasi.com/api/id/covid19/hoaxes) terbaru (dari [turnbackhoax.id](https://turnbackhoax.id/))
 
+**CATATAN**: Data paparan COVID-19 diekstrak dari [dashboard resmi ArcGIS milik BNPB](https://inacovid19.maps.arcgis.com) (Badan Nasional Penanggulangan Bencana).
+
 Yang diperlukan (versi minimum): [Node.js](https://nodejs.org/) versi 10, [curl](https://curl.haxx.se/) versi 7.58, [jq](https://stedolan.github.io/jq/manual/) versi 1.5. Pengguna Ubuntu/Debian bisa mendapatkannya dengan:
 ```
 sudo apt install -y nodejs curl jq
@@ -61,6 +63,8 @@ Currently, some available information includes (formatted as JSON):
 * [The list of referral hospitals](https://dekontaminasi.com/api/id/covid19/hospitals)
 * [Latest news articles](https://dekontaminasi.com/api/id/covid19/news) relevant to COVID-19
 * [Recently discovered hoaxes](https://dekontaminasi.com/api/id/covid19/hoaxes) (from [turnbackhoax.id](https://turnbackhoax.id/))
+
+**NOTE**: The information on COVID-19 spread is extracted from [the official ArcGIS dashboard of BNPB](https://inacovid19.maps.arcgis.com/) (National Disaster Mitigation Agency).
 
 Minimum requirements: [Node.js](https://nodejs.org/) version 10, [curl](https://curl.haxx.se/) version 7.58, [jq](https://stedolan.github.io/jq/manual/) version 1.5. For Ubuntu/Debian, fulfill these by installing the following packages:
 ```
