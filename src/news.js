@@ -88,8 +88,9 @@ function updateCovid19News() {
     });
 
     // sorted chronologically
+    allArticles.sort((p, q) => q.timestamp - p.timestamp);
     console.log();
-    console.log('ALL ARTICLES:', allArticles.length);
+    console.log('ALL ARTICLES (sorted):', allArticles.length);
     allArticles.forEach((n) => {
         const source = new URL(n.url).hostname.replace('www.', '');
         console.log(`  ${new Date(n.timestamp).toUTCString()}  ${n.title} [${source}]`);
