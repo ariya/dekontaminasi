@@ -16,6 +16,9 @@
   "keywords": [],
   "author": "Ariya Hidayat",
   "license": "MIT",
+  "dependencies": {
+    "@ariya/penjabarberita": "^1.0.5"
+  },
   "devDependencies": {
     "prettier": "~2.0.5"
   },
