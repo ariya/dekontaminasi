@@ -78,17 +78,28 @@ function updateCovid19News() {
         }
     });
 
-    let allArticles = [];
+    const collectedArticles = [];
     console.log();
     console.log('Consolidating all articles:');
     sources.forEach((source) => {
         const news = articles[source].sort((p, q) => q.timestamp - p.timestamp).slice(0, 7);
         console.log(`  Adding ${news.length} from ${source}...`);
-        allArticles = allArticles.concat(news);
+        collectedArticles.push(...news);
     });
 
-    // sorted chronologically
-    allArticles.sort((p, q) => q.timestamp - p.timestamp);
+    // cut-off for old articles
+    console.log();
+    console.log('Time right now is', new Date().toUTCString());
+    console.log('Removing too-old articles:');
+    const cutOffTime = Date.now() - 3 * 24 * 60 * 60 * 1000;
+    const allArticles = collectedArticles
+        .filter((n) => {
+            const filter = n.timestamp > cutOffTime;
+            if (!filter) console.log(`  ${new Date(n.timestamp).toUTCString()}: ${n.title}`);
+            return filter;
+        })
+        .sort((p, q) => q.timestamp - p.timestamp); // sorted chronologically
+
     console.log();
     console.log('ALL ARTICLES (sorted):', allArticles.length);
     allArticles.forEach((n) => {
