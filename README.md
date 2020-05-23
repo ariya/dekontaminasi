@@ -1,5 +1,9 @@
 # Dekontaminasi
 
+[![GitHub license](https://img.shields.io/github/license/ariya/dekontaminasi)](https://github.com/ariya/dekontaminasi/blob/master/LICENSE)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/ariya/dekontaminasi)
+[![Tests](https://github.com/ariya/dekontaminasi/workflows/Tests/badge.svg)](https://github.com/ariya/dekontaminasi/actions)
+
 [Bahasa Indonesia](#indonesian) | [English](#english)
 
 ---
