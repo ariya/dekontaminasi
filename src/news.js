@@ -72,7 +72,12 @@ function updateCovid19News() {
             if (!Array.isArray(news) || news.length <= 0) {
                 console.error('  Unable to parse news from', source);
             } else {
-                articles[source] = news;
+                function shouldInclude(article) {
+                    if (article.url.indexOf('/entertainment/') > 0) return false;
+                    return true;
+                }
+
+                articles[source] = news.filter(shouldInclude);
                 console.log(`  From ${source}: ${news.length} articles (${elapsed} ms)`);
             }
         }
