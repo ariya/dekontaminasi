@@ -90,4 +90,4 @@ public/ping
 
 that can be published just like a regular static site, e.g. using [Firebase Hosting](https://firebase.google.com/docs/hosting/), [Zeit/Vercel](https://vercel.com/), [Surge](https://surge.sh/), [Netlify](https://www.netlify.com/), [Aerobatic](https://www.aerobatic.com/), etc, or served manually from any HTTP server.
 
-Note that for [dekontaminasi.com](https://dekontaminasi.com), the data will be updated very 15 minutes because `npm run build` is triggered periodically, thanks to the  _scheduled event_ feature from GitHub Actions ([check the documentation](https://help.github.com/en/actions/reference/events-that-trigger-workflows#scheduled-events-schedule))
+Note that for [dekontaminasi.com](https://dekontaminasi.com), the data will be updated every 15 minutes because `npm run build` is triggered periodically, thanks to the  _scheduled event_ feature from GitHub Actions ([check the documentation](https://help.github.com/en/actions/reference/events-that-trigger-workflows#scheduled-events-schedule)).
