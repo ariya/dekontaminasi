@@ -18,15 +18,22 @@ function updateCovid19Hospitals(metadata) {
     child_process.execSync(`cat ${rawName} | jq -f ${jqScript} > ${fileName}`);
     const rawHospitalList = JSON.parse(fs.readFileSync(fileName, 'utf-8').toString());
     console.log(`Found ${rawHospitalList.length} hospitals`);
+    let memoizedMatches = {};
     const hospitals = rawHospitalList.map((h) => {
         let hh = {};
         Object.keys(h).forEach((k) => (hh[k] = typeof h[k] === 'string' ? h[k].trim() : h[k]));
         const province = hh.region.split(',').reverse().shift().trim();
         hh.province = province;
         if (!metadata[hh.province]) {
-            const match = fuzzyMatch(Object.keys(metadata), hh.province);
-            console.log(`  ${hh.province} => ${match.name}`);
-            hh.province = match.name;
+            const memo = memoizedMatches[hh.province];
+            if (memo) {
+                hh.province = memo;
+            } else {
+                const match = fuzzyMatch(Object.keys(metadata), hh.province);
+                memoizedMatches[hh.province] = match.name;
+                console.log(`  ${hh.province} => ${match.name}`);
+                hh.province = match.name;
+            }
         }
         return hh;
     });
