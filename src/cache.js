@@ -41,10 +41,24 @@ function isBlocked(content) {
 }
 
 function cacheArcGIS() {
-    console.log('Caching important ArcGIS data...');
+    console.log('Caching important covid19.go.id and ArcGIS data...');
 
     mkdirp('public/api');
     mkdirp('public/api/cache');
+
+    const paths = ['update.json', 'prov.json'];
+    paths.forEach((path) => {
+        const fileName = 'public/api/cache/' + path;
+        const serviceUrl = 'https://data.covid19.go.id/public/api/' + path;
+        const content = curl(serviceUrl, fileName);
+        if (content.length <= 0) {
+            console.log(`  ERROR: Unable to retrieve ${serviceName} properly`);
+            const previousData = 'https://dekontaminasi.com/api/cache/' + path;
+            curl(previousData, fileName);
+        } else {
+            console.log(`  ${path} -> ${content.length} bytes`);
+        }
+    });
 
     const services = {
         Statistik_Perkembangan_COVID19_Indonesia: null,
