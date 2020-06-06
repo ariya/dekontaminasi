@@ -19,6 +19,7 @@ function indexFiles() {
 
     // Raw JSONs shouldn't be served
     removeFile('public/api/id/covid19/national.json');
+    removeFile('public/api/id/covid19/progress-national.json');
     removeFile('public/api/id/covid19/provinces.json');
     removeFile('public/api/id/covid19/hospitals.json');
 
