@@ -15,14 +15,14 @@ function updateCovid19Stats(metadata) {
 
     function updateNational() {
         const fileName = 'public/api/id/covid19/progress-national.json';
-        const rawName = 'public/api/cache/Statistik_Perkembangan_COVID19_Indonesia';
+        const rawName = 'public/api/cache/update.json';
         const jqScript = 'src/progress-national.jq';
         child_process.execSync(`cat ${rawName} | jq -f ${jqScript} > ${fileName}`);
     }
 
     function updateProvinces() {
         const fileName = 'public/api/id/covid19/provinces.json';
-        const rawName = 'public/api/cache/COVID19_Indonesia_per_Provinsi';
+        const rawName = 'public/api/cache/prov.json';
         const jqScript = 'src/provinces.jq';
         child_process.execSync(`cat ${rawName} | jq -f ${jqScript} > ${fileName}`);
     }
@@ -33,7 +33,7 @@ function updateCovid19Stats(metadata) {
     const progressNationalStats = JSON.parse(fs.readFileSync(prefix + 'progress-national.json', 'utf-8').toString())
         .filter((s) => s.name === 'Indonesia')
         .filter((s) => s.numbers && typeof s.numbers.infected === 'number')
-        .sort((p, q) => p.day - q.day);
+        .sort((p, q) => p.timestamp - q.timestamp);
     const nationalStats = progressNationalStats.slice(-1).pop();
 
     const provincesStats = JSON.parse(fs.readFileSync(prefix + 'provinces.json', 'utf-8').toString())

@@ -1,13 +1,13 @@
 [
-    .features | .[] | .attributes |
+    .list_data | .[] |
     {
         type: "province",
-        name: .Provinsi,
+        name: .key,
         numbers:
         {
-            infected: .Kasus_Posi,
-            recovered : .Kasus_Semb,
-            fatal: .Kasus_Meni
+            infected: .jumlah_kasus,
+            recovered : .jumlah_sembuh,
+            fatal: .jumlah_meninggal
         }
     }
 ]

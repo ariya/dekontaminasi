@@ -1,13 +1,13 @@
 [
-    .features | .[] | .attributes |
+    .update | .harian | .[] |
     {
         type: "country",
         name: "Indonesia",
-        day: .Hari_ke,
+        timestamp: .key,
         numbers: {
-            infected: .Jumlah_Kasus_Kumulatif,
-            recovered: .Jumlah_Pasien_Sembuh,
-            fatal: .Jumlah_Pasien_Meninggal
+            infected: .jumlah_positif_kum .value,
+            recovered: .jumlah_sembuh_kum .value,
+            fatal: .jumlah_meninggal_kum .value
         }
     }
 ]
