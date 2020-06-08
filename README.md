@@ -47,7 +47,7 @@ public/index.html
 public/ping
 ```
 
-yang tentunya telah siap dipublikasikan sebagai situs statik, misalnya menggunakan [Firebase Hosting](https://firebase.google.com/docs/hosting/), [Zeit/Vercel](https://vercel.com/), [Surge](https://surge.sh/), [Netlify](https://www.netlify.com/), [Aerobatic](https://www.aerobatic.com/), dan yang sejenisnya, ataupun juga diletakkan di sebuah server HTTP secara manual.
+yang tentunya telah siap dipublikasikan sebagai situs statik, misalnya menggunakan [Firebase Hosting](https://firebase.google.com/docs/hosting/), [Zeit/Vercel](https://vercel.com/), [Surge](https://surge.sh/), [Netlify](https://www.netlify.com/), [Aerobatic](https://www.aerobatic.com/), [Render](https://render.com), dan yang sejenisnya, ataupun juga diletakkan di sebuah server HTTP secara manual.
 
 Khusus untuk [dekontaminasi.com](https://dekontaminasi.com), data-data tersebut akan diperbarui tiap 15 menit karena tahapan `npm run build` terus dipicu secara berkala, memanfaatkan fitur _scheduled event_ dari GitHub Actions ([lihat dokumentasinya](https://help.github.com/en/actions/reference/events-that-trigger-workflows#scheduled-events-schedule)).
 
@@ -90,6 +90,6 @@ public/index.html
 public/ping
 ```
 
-that can be published just like a regular static site, e.g. using [Firebase Hosting](https://firebase.google.com/docs/hosting/), [Zeit/Vercel](https://vercel.com/), [Surge](https://surge.sh/), [Netlify](https://www.netlify.com/), [Aerobatic](https://www.aerobatic.com/), etc, or served manually from any HTTP server.
+that can be published just like a regular static site, e.g. using [Firebase Hosting](https://firebase.google.com/docs/hosting/), [Zeit/Vercel](https://vercel.com/), [Surge](https://surge.sh/), [Netlify](https://www.netlify.com/), [Aerobatic](https://www.aerobatic.com/), [Render](https://render.com), etc, or served manually from any HTTP server.
 
 Note that for [dekontaminasi.com](https://dekontaminasi.com), the data will be updated every 15 minutes because `npm run build` is triggered periodically, thanks to the  _scheduled event_ feature from GitHub Actions ([check the documentation](https://help.github.com/en/actions/reference/events-that-trigger-workflows#scheduled-events-schedule)).
