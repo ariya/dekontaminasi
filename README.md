@@ -3,6 +3,8 @@
 [![GitHub license](https://img.shields.io/github/license/ariya/dekontaminasi)](https://github.com/ariya/dekontaminasi/blob/master/LICENSE)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/ariya/dekontaminasi)
 [![Tests](https://github.com/ariya/dekontaminasi/workflows/Tests/badge.svg)](https://github.com/ariya/dekontaminasi/actions)
+[![Uptime Robot ratio (30 days)](https://img.shields.io/uptimerobot/ratio/m785218019-04a8aacc981ef2b572e68f53)](https://dekontaminasi.com)
+
 
 [Bahasa Indonesia](#indonesian) | [English](#english)
 
