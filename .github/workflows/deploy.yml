@@ -25,7 +25,8 @@ jobs:
     - run: cat public/api/id/covid19/stats | jq .numbers
 
     - run: npm install -g netlify-cli@2.50.0
-    - run: netlify deploy --prod --dir=public
+    - run: netlify login
+    - run: netlify deploy --prod
       env:
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
