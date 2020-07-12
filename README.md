@@ -14,7 +14,7 @@
 
 Repositori ini menyimpan perkakas yang digunakan untuk membuat [dekontaminasi.com](https://dekontaminasi.com), sebuah layanan API untuk data perkembangan COVID-19 di Indonesia.
 
-Dengan mengubah isi repositori sesuai kebutuhan, Anda pun bisa menjalankan layanan API Anda sendiri untuk menyebarluaskan informasi COVID-19!
+Saat ini, Dekontaminasi digunakan sebagai sumber data bagi situs seperti [KawalCovid19.id](https://kawalcovid19.id/) dan [KabarVirus](https://kabarvirus.com). Dengan mengubah isi repositori sesuai kebutuhan, Anda pun bisa menjalankan layanan API Anda sendiri untuk menyebarluaskan informasi COVID-19!
 
 Beberapa ragam data yang tersedia (dalam format JSON):
 
@@ -57,7 +57,7 @@ Khusus untuk [dekontaminasi.com](https://dekontaminasi.com), data-data tersebut 
 
 This repository contains the tools necessary to build [dekontaminasi.com](https://dekontaminasi.com), an API service to get the latest COVID-19 development in Indonesia.
 
-If you want to run your own COVID-19 API server, simply customize and tweak this repository and deploy the data accordingly!
+Dekontaminasi.com serves as the data source for sites such as [KawalCovid19.id](https://kawalcovid19.id/) and [KabarVirus](https://kabarvirus.com). If you want to run your own COVID-19 API server, simply customize and tweak this repository and deploy the data accordingly!
 
 Currently, some available information includes (formatted as JSON):
 
