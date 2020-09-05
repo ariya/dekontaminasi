@@ -51,8 +51,8 @@ function cacheArcGIS() {
         const fileName = 'public/api/cache/' + path;
         const serviceUrl = 'https://data.covid19.go.id/public/api/' + path;
         const content = curl(serviceUrl, fileName);
-        if (content.length <= 0) {
-            console.log(`  ERROR: Unable to retrieve ${serviceName} properly`);
+        if (!content || content.length <= 0) {
+            console.log(`  ERROR: Unable to retrieve ${serviceUrl} properly`);
             const previousData = 'https://dekontaminasi.com/api/cache/' + path;
             curl(previousData, fileName);
         } else {
@@ -71,8 +71,8 @@ function cacheArcGIS() {
         const condition = services[serviceName];
         const serviceUrl = createArcGISURL(serviceName, condition);
         const content = curl(serviceUrl, fileName);
-        if (isBlocked(content)) {
-            console.log(`  ERROR: Unable to retrieve ${serviceName} properly`);
+        if (!content || content.length <= 0 || isBlocked(content)) {
+            console.log(`  ERROR: Unable to retrieve ${serviceUrl} properly`);
             const previousData = `https://dekontaminasi.com/api/cache/${serviceName}`;
             curl(previousData, fileName);
         } else {
