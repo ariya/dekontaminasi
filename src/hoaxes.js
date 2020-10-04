@@ -15,9 +15,9 @@ function updateTurnbackHoax() {
 
     const collectedArticles = urls
         .map((url) => {
-            const content = curl(url, 'turnbackhoax.log');
+            const content = curl(url, 'turnbackhoax.log', 5);
             if (!content) {
-                console.error('  Failed to obtain', source);
+                console.error('  Failed to obtain', url);
                 return [];
             }
             const list = penjabarberita(content);
