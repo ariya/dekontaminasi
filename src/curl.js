@@ -11,12 +11,22 @@ function curl(url, fileName, timeout) {
 
     let content = null;
     try {
-        child_process.execSync(cmd).toString();
-        const responseSize = fs.statSync(fileName).size;
-        if (responseSize < MAX_SIZE) {
-            content = fs.readFileSync(fileName, 'utf-8').toString();
+        const response = child_process.execSync(cmd).toString();
+        const headers = response.split('\r\n');
+        if (headers.length < 1) {
+            console.error(`Invalid HTTP response: ${response}`);
         } else {
-            console.error(`Download is too big: ${responseSize} (exceeding ${MAX_SIZE / 1024 / 1024} MB)`);
+            const status = headers[0].trim().split(' ');
+            if (['200', '301', '302'].indexOf(status[1]) < 0) {
+                console.error(`Unexpected HTTP status: ${headers[0]}`);
+            } else {
+                const responseSize = fs.statSync(fileName).size;
+                if (responseSize < MAX_SIZE) {
+                    content = fs.readFileSync(fileName, 'utf-8').toString();
+                } else {
+                    console.error(`Download is too big: ${responseSize} (exceeding ${MAX_SIZE / 1024 / 1024} MB)`);
+                }
+            }
         }
     } catch (err) {
         // Usually indicate a timeout situation
