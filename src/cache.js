@@ -83,4 +83,24 @@ function cacheArcGIS() {
     console.log('COMPLETED.');
 }
 
+function cacheKemkes() {
+    console.log('Caching important kemkes.go.id data...');
+
+    mkdirp('public/api');
+    mkdirp('public/api/cache');
+
+    const path = 'kemkes.html';
+    const fileName = 'public/api/cache/' + path;
+    const url = 'https://kemkes.go.id/';
+    const content = curl(url, fileName);
+    if (!content || content.length <= 0) {
+        console.log(`  ERROR: Unable to retrieve ${url} properly`);
+        const previousData = 'https://dekontaminasi.com/api/cache/' + path;
+        curl(previousData, fileName);
+    } else {
+        console.log(`  ${path} -> ${content.length} bytes`);
+    }
+}
+
 cacheArcGIS();
+cacheKemkes();
